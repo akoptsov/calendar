@@ -1,0 +1,98 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Arial, sans-serif;
+}
+
+.controls {
+	position: fixed;
+	top: 5vw;
+
+	padding: 1vw;
+	border: 1px solid #888888;
+	background-color: #eeeeee;
+
+	left: -180px;
+	width: 200px;
+	transition: left ease-out 1s;
+}
+
+.controls:hover {
+	left: 0;
+}
+
+.header {
+	text-align: center;
+	color: #888888;
+	margin: 1vw 0;
+
+	/* background-color: #00f0f0; */
+}
+
+.container {
+	width: 91vw;
+
+	padding: 0.5vw 0.5vw 0 0;
+	box-sizing: content-box;
+
+	margin: 1vw auto 0;
+	height: 100%;
+
+	/* background-color: #f000f0; */
+}
+
+.day {
+	display: inline-block;
+	color: #888888;
+	width: 12.5vw;
+	height: 10vw;
+	margin-left: 0.5vw;
+	margin-bottom: 0.5vw; 
+	padding: 5px;
+	box-sizing: border-box;
+	border: 1px solid #888888;
+}
+
+.saturday,
+.sunday {
+	background-color: #ffeeee;
+	border-color: #ff8888;
+	color: #ff8888;
+}
+
+
+@media print {
+	body {
+		-webkit-print-color-adjust: exact;
+		height: 100%;
+		box-sizing: border-box;
+	}
+
+	.controls {
+		display: none;
+	}
+}
+
+.tuesday:first-child {
+	margin-left: 13.5vw;
+}
+
+.wednesday:first-child {
+	margin-left: 24.5vw;
+}
+
+.thirsday:first-child {
+	margin-left: 39.5vw;
+}
+
+.friday:first-child {
+	margin-left: 52.5vw;
+}
+
+.saturday:first-child {
+	margin-left: 65.5vw;
+}
+
+.sunday:first-child {
+	margin-left: 78.5vw;
+}

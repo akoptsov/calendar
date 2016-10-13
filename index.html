@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Календарь</title>
+		<link type="text/css" rel="stylesheet" href="index.css" />
+	</head>
+	<body>
+		<aside class="controls">
+			<label class="control">
+				<span class="contol__label">Месяц</span>
+				<select id="month__value" class="contol__value">
+				</select>
+				<span class="controls__icon"></span>
+			</label>
+		</aside>
+		<header>
+			<h2 id="header" class="header"></h2>
+		</header>
+		<main id="container" class="container"></main>
+		<script>
+			var DOTW = [
+				'sunday',
+				'monday',
+				'tuesday',
+				'wednesday',
+				'thirsday',
+				'friday',
+				'saturday'
+			];
+
+			var MONTH = [
+				'Январь',
+				'Февраль',
+				'Март',
+				'Апрель',
+				'Май',
+				'Июнь',
+				'Июль',
+				'Август',
+				'Сентябрь',
+				'Октябрь',
+				'Ноябрь',
+				'Декабрь'
+			];
+
+			var document = window.document;
+			var now = new Date();
+			var month = now.getMonth();
+			var year = now.getFullYear();
+
+			function render (document, year, month) {
+				var container = document.getElementById('container');
+				var header = document.getElementById('header');
+
+				var day = 1;
+				var date = new Date(year, month, day);
+				var elem;
+
+				header.textContent = MONTH[month] + ' ' + year;
+
+				while (date.getMonth() === month) {
+					elem = document.createElement('div');
+					elem.textContent = day;
+					elem.className = 'day ' + DOTW[date.getDay()];
+					container.appendChild(elem);
+
+					day += 1;
+					date = new Date(year, month, day);
+				}
+			}
+
+			render(document, year, month);
+
+			var setMonth = document.getElementById('month__value');
+			setMonth.addEventListener('change', onMonthChange);
+
+			MONTH.forEach(function (name, index) {
+				var option = document.createElement('option');
+				option.value = index;
+				option.textContent = name;
+
+				if (index === month) {
+					option.selected = true;
+				}
+
+				setMonth.appendChild(option);
+			});
+
+			function onMonthChange(e) {
+				month = Number(this.value);
+
+				var container = document.getElementById('container');
+				container.innerHTML = '';
+
+				render(document, year, month);
+			}
+
+		</script>
+	</body>
+</html>
