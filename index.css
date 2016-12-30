@@ -9,12 +9,16 @@ html, body {
 	top: 5vw;
 
 	padding: 1vw;
-	border: 1px solid #888888;
+
+	border-style: solid;
+	border-color: #888888;
+	border-width: 1px 1px 1px 0px;
+
 	background-color: #eeeeee;
 
-	left: -180px;
-	width: 200px;
-	transition: left ease-out 1s;
+	left: -220px;
+	width: 240px;
+	transition: left ease-out 0.5s 0.3s;
 }
 
 .controls:hover {

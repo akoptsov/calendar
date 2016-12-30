@@ -10,8 +10,12 @@
 				<span class="contol__label">Месяц</span>
 				<select id="month__value" class="contol__value">
 				</select>
-				<span class="controls__icon"></span>
 			</label>
+			<label class="control">
+				<select id="year__value" class="contol__value">
+				</select>
+			</label>
+			<span class="controls__icon"></span>
 		</aside>
 		<header>
 			<h2 id="header" class="header"></h2>
@@ -48,6 +52,19 @@
 			var month = now.getMonth();
 			var year = now.getFullYear();
 
+			var YEAR = [year - 1, year, year + 1, year + 2];
+
+			var setMonth = document.getElementById('month__value');
+			initMonthSelector(setMonth, month);
+			setMonth.addEventListener('change', onMonthChange);
+
+			var setYear = document.getElementById('year__value');
+			initYearSelector(setYear, year);
+			setYear.addEventListener('change', onYearChange);
+
+
+			render(document, year, month);
+
 			function render (document, year, month) {
 				var container = document.getElementById('container');
 				var header = document.getElementById('header');
@@ -69,26 +86,53 @@
 				}
 			}
 
-			render(document, year, month);
-
-			var setMonth = document.getElementById('month__value');
-			setMonth.addEventListener('change', onMonthChange);
-
+			function initMonthSelector(selector, selectedIndex) {
 			MONTH.forEach(function (name, index) {
-				var option = document.createElement('option');
-				option.value = index;
-				option.textContent = name;
-
-				if (index === month) {
-					option.selected = true;
+					selector.appendChild(
+						createSelectOption(
+							name, 
+							index, 
+							index === selectedIndex
+						)
+					);
+				});
 				}
 
-				setMonth.appendChild(option);
+			function initYearSelector(selector, selectedIndex) {
+				YEAR.forEach(function (name, index) {
+					selector.appendChild(
+						createSelectOption(
+							name, 
+							name, 
+							name === selectedIndex
+						)
+					);
 			});
+			}
 
 			function onMonthChange(e) {
 				month = Number(this.value);
+				updateCalendar();
+			}
 
+			function onYearChange(e) {
+				year = Number(this.value);
+				updateCalendar();
+			}
+
+			function createSelectOption(label, value, selected) {
+				var option = document.createElement('option');
+				option.value = value;
+				option.textContent = label;
+
+				if (selected) {
+					option.selected = true;
+				}
+
+				return option;
+			}
+
+			function updateCalendar() {
 				var container = document.getElementById('container');
 				container.innerHTML = '';
 
